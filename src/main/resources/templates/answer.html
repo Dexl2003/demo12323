@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-secutity">
+<head>
+    <meta charset="UTF-8">
+    <title>Answer</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        .headBlock {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .textBlock {
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
+        .textTitle {
+            font-weight: bold;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<script>
+    function Selected(a) {
+        var label = a.value;
+        if (label==1) {
+            document.getElementById("Block1").style.display='block';
+            document.getElementById("Block2").style.display='none';
+            document.getElementById("Block3").style.display='none';
+        } else if (label==2) {
+            document.getElementById("Block1").style.display='none';
+            document.getElementById("Block2").style.display='block';
+            document.getElementById("Block3").style.display='none';
+        } else if (label==3){
+            document.getElementById("Block1").style.display='none';
+            document.getElementById("Block2").style.display='none';
+            document.getElementById("Block3").style.display='block';
+        }
+
+    }
+    var x = 0;
+    var y = 0;
+
+    function addInput2() {
+        if (x < 10) {
+            var str = '<input type="text" name="answer" class="textBlock" placeholder="Ответ"> <div id="inputtwo' + (x + 1) + '"></div>';
+            document.getElementById('inputtwo' + x).innerHTML = str;
+            x++;
+        } else
+        {
+            alert('STOP it!');
+        }
+    }
+
+    function addInput() {
+        if (y < 10) {
+            var str = '<input type="text" name="answer" class="textBlock" placeholder="Ответ"> <div id="input' + (y + 1) + '"></div>';
+            document.getElementById('input' + y).innerHTML = str;
+            y++;
+        } else
+        {
+            alert('STOP it!');
+        }
+    }
+</script>
+
+<he th:insert="blocks/header :: header"></he>
+
+
+<div class="headBlock">
+    <form action="answer.html" method="post">
+        <p>Введите заголовок</p>
+        <input type="text" name="title" class="textBlock" placeholder="Заголовок"><br>
+        <p>Введите описание</p>
+        <input type="text" name="label" class="textBlock" placeholder="Описание"><br>
+        <p>Введите вопрос</p>
+        <input type="text" name="question" class="textBlock" placeholder="Вопрос"><br>
+        <p>Выберите тип ответа</p>
+        <select id="type" class="Validate_Required " name="types" aria-required="true" onChange="Selected(this)">
+            <option value="" selected="selected">Тип</option>
+            <option value="1" name="OneOfSeveral">Один из многих</option>
+            <option value="2" name="ManyOfSeveral">Несколько из многих</option>
+            <option value="3" name="Text">Текст</option>
+        </select>
+        <div  id='Block1' style='display: none;'>
+            <div al-repeat="i in count" >
+                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
+                <div id="input0"></div>
+                <input type="button" class="add" onclick="addInput()" value="+">
+            </div>
+        </div>
+
+        <div  id='Block2' style='display: none;'>
+            <div al-repeat="i in count">
+                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
+                <div id="inputtwo0"></div>
+                <input type="button" class="add" onclick="addInput2()" value="+">
+            </div>
+        </div>
+
+        <div  id='Block3' style='display: none;'>
+        </div>
+
+        <input type="submit" class="btn btn-success" value="add">
+    </form>
+</div>
+
+</body>
+</html>
