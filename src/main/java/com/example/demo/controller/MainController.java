@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 @Controller
@@ -27,9 +25,6 @@ public class MainController {
     @GetMapping("/")
     public String home(Model model) {
 
-        //TODO Десириализация GSON
-
-
         Iterable<Survey> surveys = surveyRepository.findAll();
         model.addAttribute("surveyList", surveys);
 
@@ -42,13 +37,6 @@ public class MainController {
         return "login";
     }
 
-//    @PostMapping("/login")
-//    public String addUser(User user) {
-//        user.setEnabled(true);
-//        user.setRoles(Collections.singleton(Roles.ADMIN));
-//        userRepository.save(user);
-//        return "home";
-//    }
 
 //Add answer
     @GetMapping("/answer")
@@ -57,26 +45,54 @@ public class MainController {
     }
 
 
+
 //Add answer
     @PostMapping("/answer")
-    public String answer(Model model, @RequestParam String title, @RequestParam String label, @RequestParam String question, @RequestParam Set<Type> types /*, @RequestParam String answer */, @RequestParam String startDate, @RequestParam String endDate) throws IOException, ParseException {
+    public String answer(Model model, @RequestParam String title, @RequestParam String label, @RequestParam String question, @RequestParam Set<Type> types , @RequestParam String answer , @RequestParam String startDate, @RequestParam String endDate) throws IOException, ParseException {
 
-        //TODO Сириализация GSON
-
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MMM.dd",Locale.getDefault());
-//        Date stdate = formatter.parse(startDate);
-//        SimpleDateFormat
-
-
-        Survey survey = new Survey(title, label, question,/* answer,*/ types,startDate,endDate);
+        Survey survey = new Survey(title, label, question, answer, types,startDate,endDate);
         surveyRepository.save(survey);
-
 
         return "answer";
     }
 
+    @PostMapping("/answer/{id}/delete")
+    public String answerDelete(@PathVariable(value = "id") long id, Model model) throws ClassNotFoundException {
+        Survey survey = surveyRepository.findById(id)
+                .orElseThrow(() -> new ClassNotFoundException());
 
+        surveyRepository.delete(survey);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/answer/{id}/update")
+    public String answerUp(@PathVariable(value = "id") long id, Model model) throws ClassNotFoundException {
+        Optional<Survey> survey = surveyRepository.findById(id);
+
+        ArrayList<Survey> result = new ArrayList<>();
+        survey.ifPresent(result::add);
+
+        model.addAttribute("survey", result);
+        return "answer-update";
+    }
+
+    @PostMapping("/answer/{id}/update")
+    public String answerUpdate(@PathVariable(value = "id") long id, @RequestParam String title, @RequestParam String label, @RequestParam String question, @RequestParam Set<Type> types , @RequestParam String answer , @RequestParam String endDate) throws ClassNotFoundException {
+        Survey survey = surveyRepository.findById(id)
+                .orElseThrow(() -> new ClassNotFoundException());
+
+        survey.setTitle(title);
+        survey.setLabel(label);
+        survey.setQuestion(question);
+        survey.setEndDate(endDate);
+        survey.setTypes(types);
+        survey.setAnswer(answer);
+
+        surveyRepository.save(survey);
+
+        return "redirect:/";
+    }
 
 
 

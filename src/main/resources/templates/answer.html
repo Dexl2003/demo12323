@@ -24,15 +24,15 @@
 <script>
     function Selected(a) {
         var label = a.value;
-        if (label==1) {
+        if (label=='OneOfSeveral') {
             document.getElementById("Block1").style.display='block';
             document.getElementById("Block2").style.display='none';
             document.getElementById("Block3").style.display='none';
-        } else if (label==2) {
+        } else if (label=='ManyOfSeveral') {
             document.getElementById("Block1").style.display='none';
             document.getElementById("Block2").style.display='block';
             document.getElementById("Block3").style.display='none';
-        } else if (label==3){
+        } else if (label=='Text'){
             document.getElementById("Block1").style.display='none';
             document.getElementById("Block2").style.display='none';
             document.getElementById("Block3").style.display='block';
@@ -86,24 +86,24 @@
             <option value="Text" name="Text">Текст</option>
         </select>
 
-<!--        <div  id='Block1' style='display: none;'>-->
-<!--            <div al-repeat="i in count" >-->
-<!--                <input type="text" name="answer" class="textBlock" placeholder="Ответ">-->
-<!--                <div id="input0"></div>-->
-<!--                <input type="button" class="add" onclick="addInput()" value="+">-->
-<!--            </div>-->
-<!--        </div>-->
+        <div  id='Block1' style='display: none;'>
+            <div al-repeat="i in count" >
+                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
+                <div id="input0"></div>
+                <input type="button" class="add" onclick="addInput()" value="+">
+            </div>
+        </div>
 
-<!--        <div  id='Block2' style='display: none;'>-->
-<!--            <div al-repeat="i in count">-->
-<!--                <input type="text" name="answer" class="textBlock" placeholder="Ответ">-->
-<!--                <div id="inputtwo0"></div>-->
-<!--                <input type="button" class="add" onclick="addInput2()" value="+">-->
-<!--            </div>-->
-<!--        </div>-->
+        <div  id='Block2' style='display: none;'>
+            <div al-repeat="i in count">
+                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
+                <div id="inputtwo0"></div>
+                <input type="button" class="add" onclick="addInput2()" value="+">
+            </div>
+        </div>
 
-<!--        <div  id='Block3' style='display: none;'>-->
-<!--        </div>-->
+        <div  id='Block3' style='display: none;'>
+        </div>
 
         <button type="submit" class="btn btn-success" >add</button>
     </form>

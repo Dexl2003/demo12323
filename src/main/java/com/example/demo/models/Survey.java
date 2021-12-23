@@ -21,23 +21,20 @@ public class Survey {
     private String question;
     private String title;
 
-//    private String answer;
+    private String answer;
 
     @ElementCollection(targetClass = Type.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "type",joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
     private Set<Type> types;
 
-    public Survey(String title, String label, String question /*, String answer*/, Set<Type> types,String startDate, String endDate) throws IOException {
+    public Survey(String title, String label, String question , String answer, Set<Type> types,String startDate, String endDate) throws IOException {
         this.label = label;
         this.question = question;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
-//        this.answer = answer;
-
-
-
+        this.answer = answer;
         this.types = types;
     }
 
@@ -77,14 +74,14 @@ public class Survey {
         this.title = title;
     }
 
-//    public String getAnswer() {
-//        return answer;
-//    }
-//
-//    public void setAnswer(String answer) {
-//        this.answer = answer;
-//    }
-//
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
 
     public String getStartDate() {
         return startDate;
