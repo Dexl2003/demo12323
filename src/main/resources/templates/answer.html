@@ -14,9 +14,6 @@
             padding-right: 20px;
 
         }
-        .textTitle {
-            font-weight: bold;
-        }
 
 
     </style>
@@ -72,40 +69,43 @@
 
 
 <div class="headBlock">
-    <form action="answer.html" method="post">
-        <p>Введите заголовок</p>
+    <form th:action="@{/answer}" method="post">
+<!--        <p>Введите заголовок</p>-->
         <input type="text" name="title" class="textBlock" placeholder="Заголовок"><br>
-        <p>Введите описание</p>
+<!--        <p>Введите описание</p>-->
         <input type="text" name="label" class="textBlock" placeholder="Описание"><br>
-        <p>Введите вопрос</p>
+<!--        <p>Введите вопрос</p>-->
         <input type="text" name="question" class="textBlock" placeholder="Вопрос"><br>
+        <input type="date" name="startDate" class="textBlock" >
+        <input type="date" name="endDate" class="textBlock" >
         <p>Выберите тип ответа</p>
         <select id="type" class="Validate_Required " name="types" aria-required="true" onChange="Selected(this)">
             <option value="" selected="selected">Тип</option>
-            <option value="1" name="OneOfSeveral">Один из многих</option>
-            <option value="2" name="ManyOfSeveral">Несколько из многих</option>
-            <option value="3" name="Text">Текст</option>
+            <option value="OneOfSeveral" name="OneOfSeveral">Один из многих</option>
+            <option value="ManyOfSeveral" name="ManyOfSeveral">Несколько из многих</option>
+            <option value="Text" name="Text">Текст</option>
         </select>
-        <div  id='Block1' style='display: none;'>
-            <div al-repeat="i in count" >
-                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
-                <div id="input0"></div>
-                <input type="button" class="add" onclick="addInput()" value="+">
-            </div>
-        </div>
 
-        <div  id='Block2' style='display: none;'>
-            <div al-repeat="i in count">
-                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
-                <div id="inputtwo0"></div>
-                <input type="button" class="add" onclick="addInput2()" value="+">
-            </div>
-        </div>
+<!--        <div  id='Block1' style='display: none;'>-->
+<!--            <div al-repeat="i in count" >-->
+<!--                <input type="text" name="answer" class="textBlock" placeholder="Ответ">-->
+<!--                <div id="input0"></div>-->
+<!--                <input type="button" class="add" onclick="addInput()" value="+">-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div  id='Block3' style='display: none;'>
-        </div>
+<!--        <div  id='Block2' style='display: none;'>-->
+<!--            <div al-repeat="i in count">-->
+<!--                <input type="text" name="answer" class="textBlock" placeholder="Ответ">-->
+<!--                <div id="inputtwo0"></div>-->
+<!--                <input type="button" class="add" onclick="addInput2()" value="+">-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <input type="submit" class="btn btn-success" value="add">
+<!--        <div  id='Block3' style='display: none;'>-->
+<!--        </div>-->
+
+        <button type="submit" class="btn btn-success" >add</button>
     </form>
 </div>
 

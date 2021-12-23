@@ -2,42 +2,42 @@ package com.example.demo.models;
 
 import javax.persistence.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Survey {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
 
     private String label;
     private String question;
     private String title;
-    private String answer;
+
+//    private String answer;
 
     @ElementCollection(targetClass = Type.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "type",joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
     private Set<Type> types;
 
-    public Survey(String label, String question, String title, String answer, Set<Type> types) throws IOException {
-        FileOutputStream fos = new FileOutputStream("question.txt");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(answer);
-        File resource = new File("./question.txt");
-        String resFile = resource.toString();
-
-
-
+    public Survey(String title, String label, String question /*, String answer*/, Set<Type> types,String startDate, String endDate) throws IOException {
         this.label = label;
         this.question = question;
         this.title = title;
-        this.answer = resFile;
+        this.startDate = startDate;
+        this.endDate = endDate;
+//        this.answer = answer;
+
+
+
         this.types = types;
     }
 
@@ -77,27 +77,29 @@ public class Survey {
         this.title = title;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
+//    public String getAnswer() {
+//        return answer;
+//    }
+//
+//    public void setAnswer(String answer) {
+//        this.answer = answer;
+//    }
+//
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -105,7 +107,7 @@ public class Survey {
         return label;
     }
 
-    public void setLabel(String lable) {
-        this.label = lable;
+    public void setLabel(String label) {
+        this.label = label;
     }
 }
