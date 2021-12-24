@@ -2,11 +2,8 @@ package com.example.demo.models;
 
 import javax.persistence.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
-
+//Модель таблици с записями
 @Entity
 public class Survey {
 

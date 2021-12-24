@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-secutity">
 <head>
     <meta charset="UTF-8">
-    <title>update Answer</title>
+    <title>Survey</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <style>
         .headBlock {
             padding-left: 10px;
@@ -16,9 +17,9 @@
 
 
     </style>
+
 </head>
 <body>
-<he th:insert="blocks/header :: header"></he>
 
 <script>
     function Selected(a) {
@@ -43,7 +44,7 @@
 
     function addInput2() {
         if (x < 10) {
-            var str = '<input type="text" th:value="${row.answer}"  name="answer" class="textBlock" placeholder="Ответ"> <div id="inputtwo' + (x + 1) + '"></div>';
+            var str = '<input type="text" name="answer" class="textBlock" placeholder="Ответ"> <div id="inputtwo' + (x + 1) + '"></div>';
             document.getElementById('inputtwo' + x).innerHTML = str;
             x++;
         } else
@@ -54,7 +55,7 @@
 
     function addInput() {
         if (y < 10) {
-            var str = '<input type="text" th:value="${row.answer}"  name="answer" class="textBlock" placeholder="Ответ"> <div id="input' + (y + 1) + '"></div>';
+            var str = '<input type="text" name="answer" class="textBlock" placeholder="Ответ"> <div id="input' + (y + 1) + '"></div>';
             document.getElementById('input' + y).innerHTML = str;
             y++;
         } else
@@ -64,18 +65,21 @@
     }
 </script>
 
-<div class="headBlock">
-    <form th:each="row : ${survey}" th:action="@{/answer/} + ${row.id} + @{/update}" method="post">
+<he th:insert="blocks/header :: header"></he>
 
+
+<div class="headBlock">
+    <form th:action="@{/survey}" method="post">
         <!--        <p>Введите заголовок</p>-->
-        <input type="text" th:value="${row.title}" name="title" class="textBlock" placeholder="Заголовок"><br>
+        <input type="text" name="title" class="textBlock" placeholder="Заголовок"><br>
         <!--        <p>Введите описание</p>-->
-        <input type="text" th:value="${row.label}" name="label" class="textBlock" placeholder="Описание"><br>
+        <input type="text" name="label" class="textBlock" placeholder="Описание"><br>
         <!--        <p>Введите вопрос</p>-->
-        <input type="text" th:value="${row.question}" name="question" class="textBlock" placeholder="Вопрос"><br>
-        <input type="date" th:value="${row.endDate}" name="endDate" class="textBlock" >
+        <input type="text" name="question" class="textBlock" placeholder="Вопрос"><br>
+        <input type="date" name="startDate" class="textBlock" >
+        <input type="date" name="endDate" class="textBlock" >
         <p>Выберите тип ответа</p>
-        <select id="type" th:value="${row.types}" class="Validate_Required " name="types" aria-required="true" onChange="Selected(this)">
+        <select id="type" class="Validate_Required " name="types" aria-required="true" onChange="Selected(this)">
             <option value="" selected="selected">Тип</option>
             <option value="OneOfSeveral" name="OneOfSeveral">Один из многих</option>
             <option value="ManyOfSeveral" name="ManyOfSeveral">Несколько из многих</option>
@@ -84,7 +88,7 @@
 
         <div  id='Block1' style='display: none;'>
             <div al-repeat="i in count" >
-                <input type="text" th:value="${row.answer}" name="answer" class="textBlock" placeholder="Ответ">
+                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
                 <div id="input0"></div>
                 <input type="button" class="add" onclick="addInput()" value="+">
             </div>
@@ -92,7 +96,7 @@
 
         <div  id='Block2' style='display: none;'>
             <div al-repeat="i in count">
-                <input type="text" th:value="${row.answer}"  name="answer" class="textBlock" placeholder="Ответ">
+                <input type="text" name="answer" class="textBlock" placeholder="Ответ">
                 <div id="inputtwo0"></div>
                 <input type="button" class="add" onclick="addInput2()" value="+">
             </div>

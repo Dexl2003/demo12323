@@ -191,10 +191,10 @@
         <label th:text="${row.startDate}"/><br>
         <label th:text="${row.endDate}"/><br>
 
-        <form th:action="@{/answer/} + ${row.id} + @{/delete}" method="post">
+        <form th:action="@{/survey/} + ${row.id} + @{/delete}" method="post">
             <input type="submit" class="btn btn-danger" th:value="Удалить">
         </form>
-        <form th:action="@{/answer/} + ${row.id} + @{/update}">
+        <form th:action="@{/survey/} + ${row.id} + @{/update}">
         <input type="submit" class="btn btn-warning"  th:value="Редактировать">
         </form>
     </div>

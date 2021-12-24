@@ -2,7 +2,7 @@ package com.example.demo.models;
 
 import javax.persistence.*;
 import java.util.Set;
-
+//Модель таблици с пользователями
 @Entity
 public class User {
     @Id
@@ -14,10 +14,10 @@ public class User {
     private String password;
     private boolean enabled;
 
-    @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "role",joinColumns = @JoinColumn(name = "id"))
     @Enumerated(EnumType.STRING)
-    private Set<Roles> roles;
+    private Set<Role> roles;
 
 
     public Long getId() {
@@ -52,11 +52,11 @@ public class User {
         this.password = password;
     }
 
-    public Set<Roles> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Roles> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
